@@ -11,14 +11,16 @@ class GameService:
             self.properties_hash[i] = properties[i]
         self.players_hash = {}
         for player in players:
+            player.total_sum = 300
             self.players_hash[player.id] = player
-    
+
     def run(self):
         counter = 0
         winner = None
         table_size = len(self.properties_hash)
         while(counter < 1000):
-            for key, player in self.players_hash.items():
+            current_round_players = self.players_hash.copy()
+            for key, player in current_round_players.items():
                 player.current_position += random.randint(1, 6)
                 if player.current_position > table_size:
                     player.current_position = player.current_position - table_size
@@ -27,20 +29,24 @@ class GameService:
                 if self.players_hash[key].total_sum < 0:
                     self.remove_from_game(key)
 
-            if len(self.players_hash) <= 1:
-                winner = self.players_hash.values()[0]
+            if len(current_round_players) <= 1:
+                winner = list(current_round_players.values())[0]
                 break
-            
+
             counter += 1
-        
+        if not winner:
+            winners = list(current_round_players.values())
+            winners.sort(reverse=True, key=(lambda x: x.total_sum))
+            winner = winners[0]
         return winner
 
     def property_action(self, player: Player):
         prop = self.properties_hash[player.current_position - 1]
         owner = list(filter(lambda x: x.id == prop.owner_id, self.players_hash.values()))
         if owner:
+            diff = player.total_sum - prop.rent
+            owner[0].total_sum += player.total_sum if diff < 0 else prop.rent
             player.total_sum -= prop.rent
-            owner[0].total_sum += prop.rent
             self.players_hash[player.id] = player
             self.players_hash[owner[0].id] = owner[0]
         elif player.will_buy(prop.price, prop.rent):

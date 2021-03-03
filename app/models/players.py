@@ -15,10 +15,10 @@ class Player(db.Model):
 
     @staticmethod
     def insert_players():
-        db.session.add(Player(name='Lorem', play_pattern='impulsive', current_position=0, total_sum=300))
-        db.session.add(Player(name='Ipsum', play_pattern='cautious', current_position=0, total_sum=300))
-        db.session.add(Player(name='Mussum', play_pattern='rigorous', current_position=0, total_sum=300))
-        db.session.add(Player(name='Verdum', play_pattern='random', current_position=0, total_sum=300))
+        db.session.add(Player(name='Impulsive', play_pattern='impulsive', current_position=0, total_sum=300))
+        db.session.add(Player(name='Cautious', play_pattern='cautious', current_position=0, total_sum=300))
+        db.session.add(Player(name='Rigorous', play_pattern='rigorous', current_position=0, total_sum=300))
+        db.session.add(Player(name='Random', play_pattern='random', current_position=0, total_sum=300))
         db.session.commit()
 
     def will_buy(self, property_price: int, property_rent: int) -> bool:
@@ -35,4 +35,4 @@ class Player(db.Model):
 
 
     def __repr__(self):
-        return '<Player \'%s\'>' % self.name
+        return f'Person(name={self.name}, current_position={self.current_position}, total_sum={self.total_sum})'
