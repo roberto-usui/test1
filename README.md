@@ -36,7 +36,7 @@ No monento possui 1 endpoint:
 
 GET http://127.0.0.1:5000/basic-game/simulate
 Retorna valores:
-'''json
+```json
 {
     "data": {
         "average_turns": 16.17,
@@ -51,7 +51,7 @@ Retorna valores:
     },
     "message": "OK"
 }
-'''
+```
 
 
 [Descrição desafio](./DESAFIO_PYTHONDX.pdf)
