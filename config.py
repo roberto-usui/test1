@@ -8,7 +8,7 @@ load_dotenv()
 
 class Config:
     APP_NAME = os.environ.get('APP_NAME', 'Tabletop-Game')
-    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    SQLALCHEMY_COMMIT_ON_TEARDOWN = False
 
     @staticmethod
     def init_app(app):

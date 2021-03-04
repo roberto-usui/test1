@@ -15,11 +15,15 @@ class GameService:
             self.players_hash[player.id] = player
 
     def run(self):
+        total_turns = 0
         counter = 0
         winner = None
         table_size = len(self.properties_hash)
         while(counter < 1000):
+            total_turns += 1
             current_round_players = self.players_hash.copy()
+            if len(current_round_players) <= 1:
+                break
             for key, player in current_round_players.items():
                 player.current_position += random.randint(1, 6)
                 if player.current_position > table_size:
@@ -28,17 +32,20 @@ class GameService:
                 self.property_action(player)
                 if self.players_hash[key].total_sum < 0:
                     self.remove_from_game(key)
+                if len(self.players_hash) <= 1:
+                    break
 
-            if len(current_round_players) <= 1:
-                winner = list(current_round_players.values())[0]
-                break
 
             counter += 1
         if not winner:
             winners = list(current_round_players.values())
             winners.sort(reverse=True, key=(lambda x: x.total_sum))
             winner = winners[0]
-        return winner
+
+        return {
+            'winner': winner,
+            'turns': total_turns
+        }
 
     def property_action(self, player: Player):
         prop = self.properties_hash[player.current_position - 1]
