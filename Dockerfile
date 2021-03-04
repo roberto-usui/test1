@@ -6,6 +6,7 @@ RUN apt-get update -y && \
 COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
+RUN apt-get update
 RUN apt-get install -y build-essential libpq-dev
 RUN pip3 install -r requirements.txt
 COPY . /app

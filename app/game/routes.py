@@ -48,12 +48,11 @@ def treat_result(results):
         'random': len(randoms) / len(results)
     }
 
-    most_vitories = max(percentages.keys(), key=(lambda key: percentages[key]))
-    print(most_vitories)
+    most_victories = max(percentages.keys(), key=(lambda key: percentages[key]))
 
     return {
         'timeouts': timeouts,
         'average_turns': average,
         'percentages': percentages,
-        'most_vitories': most_vitories
+        'most_victories': most_victories
     }
