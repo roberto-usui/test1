@@ -6,7 +6,7 @@ Não sei porque ficou na minha cabeça que era para fazer uma API.
 
 Portanto criei uma API com um endpoint que retorna o resultado.
 
-Tabuleiro está definido em [](./manage.py), caso seja necessário modifique os valores em
+Tabuleiro está definido em [manage.py](./manage.py), caso seja necessário modifique os valores em
 Property e rode o manage.py recreate_db e setup_dev descrito abaixo.
 
 Para rodar siga o seguinte:
